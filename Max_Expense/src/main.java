@@ -19,9 +19,9 @@ public class main {
 		int[] defaultArr = getAmount(csvData);
 		
 		Max_Expense maxExpense = new Max_Expense();
-		maxExpense.maxSubArr(defaultArr);
+		int[] aaa = maxExpense.maxSubArr(defaultArr);
 		
-//		System.out.println(maxExpense);
+		System.out.println(Arrays.toString(aaa));
 		
 	}
 	

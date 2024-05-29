@@ -49,39 +49,41 @@ public class Max_Expense {
 	
 	public int[] midMaxSubArr(int[] array) {
 		
-		int[] midSumArr = new int[3];
 		
+//		array = [1,3,-2,4]
 		int m = 0;
 		m = array.length / 2;
 		int midIdx = m;
-		
-//		for(int i = m-1; i>=0; i--) {
-//			int[] arrayL = new int[m];
-//			if(arrayL[i] > arrayL[midIdx]) {
-//				midIdx = i;
-//			}
-//		}
-//		
-//		for(int i = array.length; i>=m; i--) {
-//			int[] arrayR = new int[array.length - m];
-//			if(arrayR[i] > arrayR[array.length - m + 1]) {
-//				midIdx = i;
-//			}
-//		}
-		
-		int[] maxArrL = new int[m];
-		maxArrL = Arrays.copyOfRange(array, m-2, m);
-		for(int i=m-2; i>=0; i--){
-		    int[] newarr = Arrays.copyOfRange(array, i, m);
-		    if (Arrays.stream(newarr).sum() > Arrays.stream(maxArrL).sum()){
-		        maxArrL = newarr;
-		    }
-		}
 
-		//write code to find maxArrR
+		int[] maxArrL = new int[m];
+		int[] maxArrR = new int[m];
+		int[] currentArr = new int[m];
 		
-	
 		
+		int sumArr = 0;
+		
+		maxArrL = Arrays.copyOfRange(array, m-1, m);
+		
+		for(int i = m-1; i>=0; i--) {
+			currentArr = Arrays.copyOfRange(array, i, m);
+			if(Arrays.stream(currentArr).sum() > Arrays.stream(maxArrL).sum()) {
+				maxArrL = currentArr;
+			}
+		}
+		
+		maxArrR = Arrays.copyOfRange(array, m, m+1);
+		
+		for(int i = m; i<array.length; i++) {
+			currentArr = Arrays.copyOfRange(array, m, i+1);
+			if(Arrays.stream(currentArr).sum() > Arrays.stream(maxArrR).sum()) {
+				maxArrR = currentArr;
+			}
+		}
+		
+		int[] midSumArr = new int[maxArrL.length + maxArrR.length];
+		
+		System.arraycopy(maxArrL, 0, midSumArr, 0, maxArrL.length);
+		System.arraycopy(maxArrR, 0, midSumArr, maxArrL.length, maxArrR.length);
 		
 		
 		return midSumArr;
